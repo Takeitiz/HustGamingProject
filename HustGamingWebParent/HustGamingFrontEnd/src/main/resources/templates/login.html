@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Hust', 'none')" />
+<body>
+<div class=" text-center">
+	<div th:replace="navigation :: header_menu"></div>
+
+<!--	<div>&nbsp;</div>-->
+	<div class="content" th:style="'background-image: url(' + @{images/login-bg.jpg} + ');'">
+		<div style="height: 15px"></div>
+	<form th:action="@{/login}" method="post" style=" margin: 0 auto;width: 45%; max-width: 700px; margin-top: 10vh">
+		<div th:if="${param.error}">
+			<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+		</div>
+		<div th:if="${param.logout}">
+			<p class="text-warning">You have been logged out.</p>
+		</div>
+
+		<div class="border border-secondary rounded p-3 login-box">
+			<p  style="justify-content: center; font-size: 32px; font-weight:bolder;">Login</p>
+			<div class="mb-3 mt-3" style="text-align: left">
+				<label for="email" class="form-label">Email/Số điện thoại</label>
+				<input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required/>
+			</div>
+			<div class="mb-3" style="text-align: left">
+				<label for="pwd" class="form-label">Password</label>
+				<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required/>
+			</div>
+			<p>
+				<input type="checkbox" name="remember-me" />&nbsp;Remember Me
+			</p>
+			<p>
+				<input type="submit" value="Login" class="btn btn-primary" />
+			</p>
+		</div>
+	</form>
+		<div class="optional-box container" style="width: 45%; max-width: 700px; margin-top: 10px; min-height: 100px">
+		<div>
+			Or <a th:href="@{/forgot_password}" class="forgot-password">Forgot Password</a>
+		</div>
+		<div>
+			Don't have an account? <a th:href="@{/register}" class="sign-up"><b>Sign up</b></a>
+		</div>
+
+		</div>
+	</div>
+<!--	<div>-->
+<!--		or <a th:href="@{/forgot_password}">Forgot Password</a>-->
+<!--	</div>-->
+<!--	<div>-->
+<!--		Don't have an account? <a th:href="@{/register}"><b>Sign up</b></a>-->
+<!--	</div>-->
+	<div th:replace="navigation :: footer_menu"></div>
+</div>
+<style>
+	*{
+		font-size: 18px;
+	}
+	#logo-header {
+		background-color: #070720;
+	}
+	.content {
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+		min-height: 700px;
+	}
+	.login-box,.optional-box {
+		background-color: gray;
+		border-radius: 15px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+	.forgot-password, .sign-up {
+		color: #0b5ed7;
+		line-height: 45px;
+	}
+	.forgot-password:hover,.sign-up:hover {
+		color: white;
+		border: solid ;
+		border-color: #0b5ed7;
+		background-color: #0b5ed7;
+		border-radius: 10px;
+		padding: 5px;
+		text-decoration: none;
+	}
+</style>
+</body>
+</html>

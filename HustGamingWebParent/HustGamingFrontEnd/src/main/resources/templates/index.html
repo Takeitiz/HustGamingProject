@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Hust', 'none')" />
+<body>
+<div class="container-fluid">
+    <div th:replace="navigation :: header_menu"></div>
+    <div th:replace="navigation :: search_nav"></div>
+    <div class="content" style="background-color: #EBF7F9">
+    <div class="slider-container" style="">
+        <div class="slider">
+            <div class="slide"><img th:src="@{/images/er-slider.jpg}" alt="Slide 1"></div>
+            <div class="slide"><img th:src="@{/images/cyper-punk-slider.jpg}" alt="Slide 2"></div>
+            <div class="slide"><img th:src="@{/images/re4-slider.png}" alt="Slide 3"></div>
+            <div class="slide"><img th:src="@{/images/totk-slider.jpg}" alt="Slide 4"></div>
+            <div class="slide"><img th:src="@{/images/elden-ring-slider.jpg}" alt="Slide 5"></div>
+            <div class="slide"><img th:src="@{/images/baldur-gate-slider.jpg}" alt="Slide 6"></div>
+
+            <!-- Thêm các slide khác nếu cần -->
+        </div>
+        <button class="prevBtn" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="nextBtn" onclick="plusDivs(+1)">&#10095;</button>
+    </div>
+
+    <div class="row me-auto mx-auto" style="text-align: center;">
+        <div class="col-sm-3 cate-card card" th:each="cat : ${listCategories}" style="max-width:250px; max-height: 300px;">
+            <div class="me-auto mx-auto"><img th:src="@{${cat.imagePath}}" class="card-img-top" style=" max-width:200px; height: auto; margin: 10px 12.2px " /></div>
+            <div>
+                <a th:href="@{'/c/' + ${cat.alias}}" id="cate-button">[[${cat.name}]]</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div th:replace="navigation :: footer_menu"></div>
+</div>
+<style>
+    .cate-card {
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        background-color: #E0E0E0;
+
+    }
+    #cate-button {
+        line-height: 40px;
+        border-style: solid;
+        border-width: 1px;
+        text-decoration: none;
+        padding: 7px;
+        border-radius: 5px;
+    }
+    #cate-button:hover {
+        background-color: gray;
+        color: white;
+        border-style: solid;
+        border-width: 1px;
+    }
+    .slider-container {
+        position: relative;
+        max-width: 800px;
+        margin: auto;
+        min-height: 500px;
+    }
+
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+        /*min-width: 100%;*/
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+
+    }
+
+    .prevBtn,
+    .nextBtn {
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        cursor: pointer;
+    }
+
+    .prevBtn {
+        left: 10px;
+    }
+
+    .nextBtn {
+        right: 10px;
+    }
+</style>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("slide");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length} ;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+</script>
+</body>
+</html>

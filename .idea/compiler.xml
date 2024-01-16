@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="HustGamingCommon" />
+        <module name="HustGamingFrontEnd" />
+        <module name="HustGamingBackEnd" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Shopme" target="17" />
+      <module name="ShopmeBackEnd" target="17" />
+      <module name="ShopmeFrontEnd" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="HustGamingBackEnd" options="-parameters" />
+      <module name="HustGamingCommon" options="-parameters" />
+      <module name="HustGamingFrontEnd" options="-parameters" />
+      <module name="HustGamingWebParent" options="" />
+      <module name="ShopmeBackEnd" options="" />
+      <module name="ShopmeFrontEnd" options="" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>Login - HustGaming Admin</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        *{
+            font-size: 18px;
+        }
+        #logo-header {
+            background-color: #070720;
+        }
+        .content {
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 80vh;
+        }
+        .login-box {
+            background-color: gray;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid text-center">
+
+    <div style="background-color: #070720 ">
+        <img th:src="@{/images/Logo.png}" />
+    </div>
+    <div class="content" th:style="'background-image: url(' + @{images/login-bg.jpg} + ');'">
+        <div style="height: 15px"></div>
+    <form th:action="@{/login}" class="container" method="post" style=" margin: 0 auto;width: 45%; max-width: 700px">
+        <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+        <div th:if="#{param.logout}">
+            <div class="alert alert-warning">
+                <strong>You have been logged out!</strong>
+            </div>
+        </div>
+
+        <div class="border border-secondary rounded p-3 login-box">
+            <p  style="justify-content: center; font-size: 32px; font-weight:bolder;">Login</p>
+            <div class="mb-3 mt-3" style="text-align: left">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required/>
+            </div>
+            <div class="mb-3" style="text-align: left">
+                <label for="pwd" class="form-label">Password</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" required/>
+            </div>
+<!--            <p>-->
+<!--                <input type="email" name="email" class="form-control" placeholder="Email" required/>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                <input type="password" name="password" class="form-control" placeholder="Password" required/>-->
+<!--            </p>-->
+                <input type="checkbox" name="remember-me" />&nbsp;Remember Me
+            </p>
+            <p>
+                <input type="submit" value="Login" class="btn btn-primary">
+            </p>
+        </div>
+    </form>
+    </div>
+    <div style="background-color: #070720; color: gray; padding: 15px">
+        <p>Hust Gaming - Made by Group 18</p>
+    </div>
+</div>
+
+</body>
+</html>

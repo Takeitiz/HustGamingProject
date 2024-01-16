@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Shopping Cart', 'none')" />
+<body>
+<div class="container-fluid">
+	<div th:replace="navigation :: header_menu"></div>
+	<div th:replace="navigation :: search_nav"></div>
+
+	<div class="text-center">
+		<h2>Checkout</h2>
+	</div>
+
+	<div class="row m-1">
+		<div class="col-sm-8">
+			<div class="card">
+				<div class="card-header"><h5>Personal information</h5></div>
+				<div class="card-body">
+					<p>
+						[[${shippingAddress}]]
+					</p>
+				</div>
+			</div>
+			<p class="bg-primary text-white"style="margin-top:5px">Please<strong> check the information </strong> carefully before payment</p>
+			<div class="card mt-3 mb-3">
+				<div class="card-header"><h5>Payment Method</h5></div>
+				<div class="card-body">
+					<div class="row">
+						<!--						phần hướng dẫn thanh toán-->
+						<div class="col-sm-6">
+							<p class="thanhtoan1" style="text-align: center;color:#FF0000"><strong>Payment steps</strong></p>
+							<p class="buoc1"style="color:#FF0000"><strong>Step 1: Pay for product purchase</strong></p>
+							<p class="infor1"><strong>Customers pay via bank transfer:</strong></p>
+							<p class="infor2"><strong>Account holder: HUA HANH QUAN</strong></p>
+							<p class="infor3"><strong>Account number: 37110001072730</strong></p>
+							<p class="infor4"><strong>Bank name: BIDV, LUC YEN BRANCH</strong></p>
+							<p class="infor5"><strong>Transfer content: username </strong></p>
+							<p class="buoc2"style="color:#FF0000"><strong>Step 2: Click button Checkout down here</strong></p>
+							<p class="bg-danger text-white"><strong>Note: Please transfer the full amount to avoid errors.</strong></p>
+							<p class="bg-info text-white">You can contact us via <strong>fanpage</strong> for help</p>
+						</div>
+						<!--						phần mã QR-->
+						<div class="col-sm-6" >
+							<img th:src="@{/images/anhmaqr.jpg}" style="height:500px;width:auto" />
+<!--							<img src="/templates/checkout/anhmaqr.jpg"style="height:500px;width:500px">-->
+						</div>
+					</div>
+					<form th:action="@{/place_order}" method="post">
+						<p>
+							<button class="btn btn-primary" name="paymentMethod" type="submit" id="buttonSubmit" value="CREDIT_CARD">Checkout</button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="card">
+				<div class="card-header"><h5>Order Summary</h5></div>
+				<div class="card-body">
+					<div>
+						<table>
+							<th:block th:each="item : ${cartItems}">
+								<tr th:with="product = ${item.product}">
+									<td>[[${item.quantity}]] X &nbsp;&nbsp;</td>
+									<td width="70%">
+										<a th:href="@{'/p/' + ${product.alias}}" target="_blank">
+											[[${product.shortName}]]
+										</a>
+										<br/>
+									</td>
+									<td>
+										<div th:replace="fragments :: format_currency(${item.subtotal})">
+									</td>
+								</tr>
+							</th:block>
+							<tr><td colspan="3"><hr/></tr>
+						</table>
+					</div>
+
+					<div class="row mt-2">
+						<div class="col">Product Total: </div>
+						<div class="col"><div th:replace="fragments :: format_currency(${checkoutInfo.productTotal})"></div></div>
+					</div>
+					<div class="row mt-2">
+						<div class="col">Payment Total: </div>
+						<div class="col"><b><div th:replace="fragments :: format_currency(${checkoutInfo.paymentTotal})"></div></b></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="navigation :: footer_menu"></div>
+</div>
+<script type="text/javascript">
+	contextPath = "[[@{/}]]";
+	var csrfHeaderName = "[[${_csrf.headerName}]]";
+	var csrfValue = "[[${_csrf.token}]]";
+</script>
+</body>
+</html>	

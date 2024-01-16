@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymleaf-extras-springsecurity6">
+<head th:replace="fragments :: page_head('Home - HustGaming Admin', 'none')" />
+
+<body>
+<div class="">
+    <div th:replace="navigation :: menu"></div>
+    <div class="content" th:style="'background-image: url(' + @{images/login-bg.jpg} + ');'">
+        <h2>HustGaming Control Panel</h2>
+        Welcome
+        <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
+        <span sec:authentication="principal.authorities"></span>
+    </div>
+
+    <div th:replace="fragments :: footer" />
+</div>
+<style>
+    .content {
+        min-height: 100vh;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+</body>
+</html>
